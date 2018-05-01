@@ -91,8 +91,8 @@
 	<property name="data-extraction.dir" location="../org.eclipse.birt.report.engine.dataextraction" />
 	<property name="data-adapter-api.dir" location="../org.eclipse.birt.report.data.adapter" />
 
-	<property name="buildDirectory" value="${eclipse.home}"/>
-	<property name="baseLocation" value="${eclipse.home}"/>
+	<property name="buildDirectory" value="/Users/tlondon/techmod/bds/development_env/Eclipse.app/Contents/Eclipse"/>
+	<property name="baseLocation" value="/Users/tlondon/techmod/bds/development_env/Eclipse.app/Contents/Eclipse"/>
 	<property name="baseLocation.emf" value="${baseLocation}"/>
 	<!-- Libararies -->
 	<property name="codec.jar" value="lib/commons-codec-1.3.jar" />
@@ -101,7 +101,7 @@
 	<property name="birt.dir" value="birt_web" />
 	<property name="birt.dir.OSGI" value="birt_web_OSGI" />
 	<property name="birt.dir.original" value="birt" />
-
+	<property name="integrate.dir" value="${baseLocation}"/>
 	<!-- set platform related properties-->
 	<condition property="basews" value="win32">
 		<os family="windows" />
@@ -282,16 +282,16 @@
 			<include name="*.jar" />
 		</fileset>		
 		<!-- Copy axis related jars -->
-		<fileset dir="${buildDirectory}/plugins/org.apache.axis_${org.apache.axis}/lib" >
+		<fileset dir="${buildDirectory}/plugins/org.apache.axis_1.4.0.v201411182030/lib" >
 			<include name="*.jar"/>
 		</fileset>
-		<fileset dir="${buildDirectory}/plugins/javax.xml.rpc_${javax.xml.rpc}/lib" >
+		<fileset dir="${buildDirectory}/plugins/javax.xml.rpc_1.1.0.v201209140446/lib" >
 			<include name="*.jar"/>
 		</fileset>
-		<fileset dir="${buildDirectory}/plugins/javax.xml.soap_${javax.xml.soap}/lib" >
+		<fileset dir="${buildDirectory}/plugins/javax.xml.soap_1.2.0.v201005080501/lib" >
 			<include name="*.jar"/>
 		</fileset>	
-		<fileset dir="${buildDirectory}/plugins/org.apache.commons.discovery_${org.apache.commons.discovery}/lib" >
+		<fileset dir="${buildDirectory}/plugins/org.apache.commons.discovery_0.2.0.v201004190315/lib" >
 			<include name="*.jar"/>
 		</fileset>
 	</copy>
@@ -347,7 +347,7 @@
 <target name="viewservlets" depends="init">
 	<delete dir="${temp.folder}/${birt.dir}/WEB-INF/lib/viewservlets.jar.bin" />
 	<mkdir dir="${temp.folder}/${birt.dir}/WEB-INF/lib/viewservlets.jar.bin" />
-	<javac destdir="${temp.folder}/${birt.dir}/WEB-INF/lib/viewservlets.jar.bin" source="1.6" target="1.6" executable="${jvm16_home}/bin/javac" fork="yes" debug="true">
+	<javac destdir="${temp.folder}/${birt.dir}/WEB-INF/lib/viewservlets.jar.bin" source="1.6" target="1.6" executable="/usr/bin/javac" fork="yes" debug="true">
 		<!--compilerarg line="${compilerArg}" /-->
 		<classpath>
 			<fileset dir="${baseLocation}/plugins">
@@ -389,6 +389,9 @@
 				<include name="org.apache.jasper*.jar" />
 				<include name="org.apache.commons.logging*.jar" />
 				<include name="javax._1.5*.jar"/>
+			</fileset>
+			<fileset dir="${export.dir}/lib">
+				<include name="*.jar" />
 			</fileset>
 			<fileset dir="${buildDirectory}/plugins" >
 				<include name="org.apache.axis_*/lib/*.jar"/>
@@ -481,13 +484,13 @@
 				<include name="org.eclipse.orbit.mongodb_*.jar"/>
 				<include name="org.apache.poi_*.jar"/>
 			</fileset>
-			<fileset dir="../org.eclipse.birt.report.engine/lib">
+			<fileset dir="../../engine/org.eclipse.birt.report.engine/lib">
 				<include name="*.jar"/>
 			</fileset>
-			<fileset dir="../org.apache.derby.core">
+			<fileset dir="../../common/org.apache.derby.core">
 				<include name="*.jar"/>
 			</fileset>
-			<fileset dir="../org.w3c.sac/lib">
+			<fileset dir="../../common/org.w3c.sac/lib">
 				<include name="*.jar"/>
 			</fileset>
 			<fileset dir="${integrate.dir}/plugins">

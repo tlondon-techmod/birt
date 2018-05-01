@@ -584,6 +584,12 @@ class ViewerHTMLActionHandler extends HTMLActionHandler
 			return null;
 
 		String baseURL = getBaseUrl( context );
+		// we use token security, through BDS login
+		// this is redirected to /reporting, but to
+		// use such security in drill down reports we
+		// must remove the /reporting to allow for token
+		// usage
+		baseURL = baseURL.replaceAll("/reporting", "");
 		StringBuffer link = new StringBuffer( );
 		String reportName = getReportName( context, action );
 
