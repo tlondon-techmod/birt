@@ -1547,8 +1547,8 @@ public class ReportEngineService
 
 			if ( pageRange != null )
 			{
-				if ( !IBirtConstants.SERVLET_PATH_FRAMESET.equalsIgnoreCase( servletPath )
-						|| !ParameterAccessor.PARAM_FORMAT_HTML.equalsIgnoreCase( format ) )
+				if ( !servletPath.contains(IBirtConstants.SERVLET_PATH_FRAMESET)
+						|| !ParameterAccessor.PARAM_FORMAT_HTML.contains( format ) )
 					renderTask.setPageRange( pageRange );
 			}
 
@@ -1686,8 +1686,8 @@ public class ReportEngineService
 		else
 		{
 			boolean isEmbeddable = false;
-			if ( IBirtConstants.SERVLET_PATH_FRAMESET.equalsIgnoreCase( servletPath )
-					|| IBirtConstants.SERVLET_PATH_RUN.equalsIgnoreCase( servletPath ) )
+			if ( servletPath.contains(IBirtConstants.SERVLET_PATH_FRAMESET)
+					|| servletPath.contains(IBirtConstants.SERVLET_PATH_RUN) )
 				isEmbeddable = true;
 			if ( renderOption instanceof IHTMLRenderOption )
 				( (IHTMLRenderOption) renderOption ).setEmbeddable( isEmbeddable );

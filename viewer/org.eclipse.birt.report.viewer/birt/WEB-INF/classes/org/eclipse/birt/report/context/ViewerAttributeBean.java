@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.birt.report.IBirtConstants;
@@ -132,11 +133,11 @@ public class ViewerAttributeBean extends BaseAttributeBean
 	protected void __init( HttpServletRequest request ) throws Exception
 	{
 		// If GetImage operate, return directly.
-		if ( ParameterAccessor.isGetImageOperator( request )
-				&& ( IBirtConstants.SERVLET_PATH_FRAMESET.equalsIgnoreCase( request.getServletPath( ) )
-						|| IBirtConstants.SERVLET_PATH_OUTPUT.equalsIgnoreCase( request.getServletPath( ) )
-						|| IBirtConstants.SERVLET_PATH_RUN.equalsIgnoreCase( request.getServletPath( ) ) || IBirtConstants.SERVLET_PATH_PREVIEW.equalsIgnoreCase( request.getServletPath( ) ) ) )
-		{
+		if (ParameterAccessor.isGetImageOperator(request)
+				&& (request.getServletPath().contains(IBirtConstants.SERVLET_PATH_FRAMESET)
+						|| request.getServletPath().contains(IBirtConstants.SERVLET_PATH_OUTPUT))
+				|| request.getServletPath().contains(IBirtConstants.SERVLET_PATH_RUN)
+				|| request.getServletPath().contains(IBirtConstants.SERVLET_PATH_PREVIEW)) {
 			return;
 		}
 
@@ -161,8 +162,8 @@ public class ViewerAttributeBean extends BaseAttributeBean
 		// If use frameset/output/download/extract servlet pattern, generate
 		// document
 		// from design file
-		if ( IBirtConstants.SERVLET_PATH_FRAMESET.equalsIgnoreCase( request.getServletPath( ) )
-				|| IBirtConstants.SERVLET_PATH_OUTPUT.equalsIgnoreCase( request.getServletPath( ) )
+		if ( request.getServletPath().contains(IBirtConstants.SERVLET_PATH_FRAMESET)
+				|| request.getServletPath().contains(IBirtConstants.SERVLET_PATH_OUTPUT)
 				|| IBirtConstants.SERVLET_PATH_DOWNLOAD.equalsIgnoreCase( request.getServletPath( ) )
 				|| IBirtConstants.SERVLET_PATH_EXTRACT.equalsIgnoreCase( request.getServletPath( ) ) )
 		{

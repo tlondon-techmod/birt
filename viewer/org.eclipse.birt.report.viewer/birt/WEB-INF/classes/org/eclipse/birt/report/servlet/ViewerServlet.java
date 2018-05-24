@@ -166,13 +166,11 @@ public class ViewerServlet extends BirtSoapMessageDispatcherServlet
 	{
 		IFragment activeFragment = null;
 		String servletPath = context.getRequest( ).getServletPath( );
-		if ( IBirtConstants.SERVLET_PATH_FRAMESET
-				.equalsIgnoreCase( servletPath ) )
+		if ( servletPath.contains(IBirtConstants.SERVLET_PATH_FRAMESET))
 		{
 			activeFragment = viewer;
 		}
-		else if ( IBirtConstants.SERVLET_PATH_RUN
-				.equalsIgnoreCase( servletPath ) )
+		else if ( servletPath.contains(IBirtConstants.SERVLET_PATH_RUN) )
 		{
 			activeFragment = run;
 		}

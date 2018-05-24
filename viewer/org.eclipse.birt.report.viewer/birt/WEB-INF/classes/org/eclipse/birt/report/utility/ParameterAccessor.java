@@ -1003,7 +1003,7 @@ public class ParameterAccessor
 			return page;
 
 		String servletPath = request.getServletPath( );
-		if ( IBirtConstants.SERVLET_PATH_FRAMESET.equalsIgnoreCase( servletPath )
+		if ( servletPath.contains(IBirtConstants.SERVLET_PATH_FRAMESET)
 				&& PARAM_FORMAT_HTML.equalsIgnoreCase( getFormat( request ) ) )
 		{
 			page = 1;
