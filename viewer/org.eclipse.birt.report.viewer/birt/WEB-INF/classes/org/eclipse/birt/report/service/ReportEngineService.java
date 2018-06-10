@@ -95,6 +95,8 @@ import org.eclipse.birt.report.utility.DataUtil;
 import org.eclipse.birt.report.utility.LoggingUtil;
 import org.eclipse.birt.report.utility.ParameterAccessor;
 
+import com.berwick.reporting.BDSReportEngine;
+
 /**
  * Provides all the services from Engine.
  */
@@ -335,6 +337,10 @@ public class ReportEngineService
 			// Startup OSGI Platform
 			Platform.startup( config );
 
+			/*
+			 * Override below to allow our own ReportEngine, normally this would be
+			 * done through a plug-in extension but we are not a plug-in extension 
+			 *
 			IReportEngineFactory factory = (IReportEngineFactory) Platform.createFactoryObject( IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY );
 			if ( factory == null )
 			{
@@ -342,7 +348,9 @@ public class ReportEngineService
 				throw new ViewerException( ResourceConstants.REPORT_SERVICE_EXCEPTION_STARTUP_REPORTENGINE_ERROR );
 			}
 			engine = factory.createReportEngine( config );
-
+			*/
+			engine = new BDSReportEngine(config);
+			
 			// Get supported output formats
 			ParameterAccessor.supportedFormats = engine.getSupportedFormats( );
 
