@@ -49,6 +49,7 @@ public class BirtRunReportActionHandler extends AbstractBaseActionHandler
 	 * @exception ReportServiceException
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public void __execute( ) throws Exception
 	{
 		ViewerAttributeBean attrBean = (ViewerAttributeBean) context.getBean( );
@@ -58,6 +59,21 @@ public class BirtRunReportActionHandler extends AbstractBaseActionHandler
 		if ( parameterMap == null )
 			parameterMap = new HashMap( );
 
+		/* decode parameters */
+		HashMap<Object, Object> decodedParameterMap = new HashMap<>();
+		parameterMap.forEach((key, value) -> {
+			if(value instanceof String) {
+				if(value.toString().contains("&amp;")) {
+					decodedParameterMap.put(key, value.toString().replaceAll("&amp;", "&"));
+				} else {
+					decodedParameterMap.put(key, value);
+				}
+			} else {
+				decodedParameterMap.put(key, value);
+			}
+		});
+		parameterMap = decodedParameterMap;
+		
 		Map displayTexts = attrBean.getDisplayTexts( );
 		if ( displayTexts == null )
 			displayTexts = new HashMap( );

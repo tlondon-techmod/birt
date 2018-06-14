@@ -137,6 +137,21 @@ public class BirtViewerReportService implements IViewerReportService
 		{
 			parsedParams.putAll( parameters );
 		}
+		
+		/* decode parameters */
+		HashMap<Object, Object> decodedParameterMap = new HashMap<>();
+		parsedParams.forEach((key, value) -> {
+			if(value instanceof String) {
+				if(value.toString().contains("&amp;")) {
+					decodedParameterMap.put(key, value.toString().replaceAll("&amp;", "&"));
+				} else {
+					decodedParameterMap.put(key, value);
+				}
+			} else {
+				decodedParameterMap.put(key, value);
+			}
+		});
+		parsedParams = decodedParameterMap;
 
 		// Set display Text of select parameters
 		Map displayTextMap = attrBean.getDisplayTexts( );

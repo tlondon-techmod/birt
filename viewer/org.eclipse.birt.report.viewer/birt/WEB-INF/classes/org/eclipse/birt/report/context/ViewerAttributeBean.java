@@ -238,6 +238,7 @@ public class ViewerAttributeBean extends BaseAttributeBean
 	 * @param request
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	protected void __initParameters( HttpServletRequest request )
 			throws Exception
 	{
@@ -262,6 +263,18 @@ public class ViewerAttributeBean extends BaseAttributeBean
 		this.parametersAsString = getParsedParametersAsString( parameterDefList,
 				request,
 				options );
+		
+		/* decode parameter values */
+		HashMap<Object, Object> decodedParameters = new HashMap<>();
+		this.parametersAsString.forEach((key, entry) -> {
+			if(entry instanceof String) {
+				String decoded = ParameterAccessor.htmlDecode((String) entry);
+				decodedParameters.put(key, decoded);
+			} else {
+				decodedParameters.put(key, entry);
+			}
+		});
+		this.parametersAsString = decodedParameters;
 
 		// Check if miss parameter
 		if ( documentInUrl )
