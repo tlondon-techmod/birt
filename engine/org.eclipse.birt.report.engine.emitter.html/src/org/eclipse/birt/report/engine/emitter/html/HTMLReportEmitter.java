@@ -845,6 +845,8 @@ public class HTMLReportEmitter extends ContentEmitterAdapter
 		}
 
 		outputClientScript( report );
+		
+		writer.close();
 	}
 	
 	protected void outputDIVTitle( IReportContent report )
